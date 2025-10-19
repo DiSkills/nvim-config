@@ -5,25 +5,33 @@ call plug#begin('~/.nvim/plugged')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
+    " Telescope
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+
     " Nvim cmp
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-nvim-lsp'
+
+    " UX
+    Plug 'windwp/nvim-autopairs'
+    Plug 'Wansmer/langmapper.nvim'
+    Plug 'uga-rosa/translate.nvim'
 
     " Tpope
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-surround'
 
-    " DB
-    Plug 'tpope/vim-dadbod'
-    Plug 'kristijanhusak/vim-dadbod-ui'
-    Plug 'kristijanhusak/vim-dadbod-completion'
-
     " UI
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'morhetz/gruvbox'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+
+    " Markdown
+    Plug 'iamcco/markdown-preview.nvim'
 call plug#end()
 " }}}
 
@@ -38,6 +46,8 @@ colorscheme gruvbox
 filetype on
 " Enable plugins
 filetype plugin on
+syntax enable
+filetype plugin indent on
 " Don't save backup files
 set nobackup
 " Set history size
@@ -103,6 +113,15 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " Reindexing
 nnoremap <f5> :!ctags -R<CR>
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" Translator
+nnoremap <leader>tru <cmd>Translate ru<cr>
+nnoremap <leader>ten <cmd>Translate en<cr>
+nnoremap <leader>tr <cmd>Translate en -output=replace<cr><esc>
 " }}}
 
 " LSP -------------------------------------------------------------------- {{{
@@ -114,5 +133,12 @@ EOF
 " UI --------------------------------------------------------------------- {{{
 lua << EOF
 require 'ui'
+EOF
+" }}}
+
+" UX --------------------------------------------------------------------- {{{
+lua << EOF
+require('nvim-autopairs').setup {}
+require('langmapper').setup {}
 EOF
 " }}}
