@@ -17,6 +17,7 @@ call plug#begin('~/.nvim/plugged')
     Plug 'windwp/nvim-autopairs'
     Plug 'Wansmer/langmapper.nvim'
     Plug 'uga-rosa/translate.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
 
     " Tpope
     Plug 'tpope/vim-commentary'
